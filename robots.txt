@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /*.html$
+Disallow: /
+
+
+# Notes #
+
+# Reference:
+# https://developers.google.com/search/docs/advanced/robots/robots_txt#syntax
+# https://developers.google.com/search/docs/advanced/robots/create-robots-txt
+
+# Some crawlers are only compatible with `Allow` prior to `Disallow`:
+# https://en.wikipedia.org/wiki/Robots_exclusion_standard#Allow_directive
+# https://developers.google.com/search/docs/advanced/robots/robots-faq#h14
+
+# `robots.txt` prevents crawlers from making requests (if they respect the rules),
+# but Google may still partially index content (by URL) that is referenced from external sources,
+# unless you permit reading the content and leverage `robots` meta tag `noindex` to forbid indexing:
+# https://en.wikipedia.org/wiki/Robots_exclusion_standard#Meta_tags_and_headers
+# https://developers.google.com/search/docs/advanced/crawling/block-indexing
+# 
+# > If I block Google from crawling a page using a robots.txt disallow directive, will it disappear from search results?
+# https://developers.google.com/search/docs/advanced/robots/robots-faq#h17
+# > Is the robots meta tag a replacement for the robots.txt file?
+# https://developers.google.com/search/docs/advanced/robots/robots-faq#h21
