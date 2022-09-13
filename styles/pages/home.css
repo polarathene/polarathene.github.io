@@ -1,0 +1,17 @@
+@import url(/styles/effects/tilt.css);
+@import url(/styles/effects/pulse.css);
+/* Import after effects for any overrides to work */
+@import url(/styles/components/avatar.css);
+
+#about {
+  display: flex;
+}
+
+#about > div {
+  margin: 30px;
+}
+
+/* just temporary fixed width for cleaner text boundary against the avatar element */
+.introduction {
+  width: 540px;
+}

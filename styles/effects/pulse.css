@@ -1,0 +1,83 @@
+/*
+ * Pulse effect animation
+ * Grows each circle outwards while fading out,
+ * like a pulse or beacon.
+ */
+
+ /* Used to overlap layers within the effect-pulse container */
+ .stack-layer-container {
+  position: relative;
+}
+
+.stack-layer-container > .stack-layer {
+  position: absolute;
+}
+
+ /* Defaults for the effect */
+.effect-pulse {
+  --beacon-size: var(--size-legendary);
+  --pulse-color: var(--turquoise);
+}
+
+.effect-pulse > div {
+  width: var(--beacon-size);
+  height: var(--beacon-size);
+
+  /* Make these layers into circles! */
+  background-color: var(--pulse-color);
+  border-radius: 50%;
+
+  /*
+    This keeps the effect layers behind the main display content,
+    prevents the layers being drawn over content at the default z-depth.
+  */
+  transform: translateZ(-2px);
+}
+
+@keyframes pulse-transform {
+  to {
+    transform:  translateZ(-2px) scale(1.3);
+  }
+}
+
+/*
+  Opacity finishes earlier, so the transform continues to scale as it fades out,
+  otherwise perhaps due to the easing, the fade out looks slow for the last pulse.
+*/
+@keyframes pulse-opacity {
+  0% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* The effect needs to be defined at the hover event,
+ * it will re-create the animation each time so that it properly resets on hover.
+ */
+.effect-pulse:hover > div {
+  animation: pulse-transform, pulse-opacity;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: var(--easing-easeOutExpo);
+}
+
+/* Stagger the animation for each circle/pulse:
+ * These must be associated to the hover event,
+ * since that's when the animation is re-created (clears prior settings).
+ */
+.effect-pulse:hover > div:nth-of-type(1) {
+  animation-delay: 0.6s;
+}
+
+.effect-pulse:hover > div:nth-of-type(2) {
+  animation-delay: 1s;
+}
+
+.effect-pulse:hover > div:nth-of-type(3) {
+  animation-delay: 1.5s;
+}

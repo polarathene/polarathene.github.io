@@ -1,0 +1,226 @@
+@import url(/styles/effects/pulse.css);
+@import url(/styles/components/chat.css);
+@import url(/styles/components/lesson-relativity/index.css);
+
+h1 {
+  font-size: 46px;
+}
+
+h2 {
+  font-size: 32px;
+  text-align: center;
+}
+
+article {
+  max-width: 800px;
+  margin-bottom: 200px;
+}
+
+p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/*
+  Most OS emoji fonts (especially Windows last I checked) are really ugly.
+  Googles is one of the better ones (that's also free/open-source).
+  These two fonts have been subsetted as their huge (especially the colour one at 10MB),
+  so these versions only include the exact emoji I am using.
+
+  For reproducing this subsetted font, get the full font and run this Docker image against it:
+  docker run --rm -it -v "${PWD}:/app" talentplatforms/glyphhanger --whitelist='🤮😌🥳😭🧐😫😖👻😆🤯😱😴🤓🤔😂🧙‍♂️' --subset='/app/NotoColorEmoji.ttf'
+  For more information see:
+  https://github.com/lycheeverse/lychee/pull/693#issuecomment-1193064623
+*/
+@font-face {
+  font-family: 'Noto Emoji Color';
+  src: url(/assets/NotoColorEmoji-subset.woff2) format("woff2");
+}
+/* Fallback, since some browsers embed their own emoji font (Firefox: Twemoji) */
+@font-face {
+  font-family: 'Noto Emoji Monochrome';
+  src: url(/assets/NotoEmoji-Regular-subset.woff2) format("woff2");
+}
+
+/*
+  The quest begins, it will be legendary!
+*/
+
+.you-are-here {
+  /* bound by the laws of document flow */
+  position: static;
+
+  /* a dash of chemical x */
+  --purple: rgb(65, 40, 110);
+
+  /* the 'comfort zone' uses em to scale by this multiplier based on font-size: */
+  --personal-space: 3em;
+}
+
+:root {
+  --emoji-barf: "🤮";
+  --emoji-calm: "😌";
+  --emoji-celebrate: "🥳";
+  --emoji-crying: "😭";
+  --emoji-curious: "🧐";
+  --emoji-falling: "😫";
+  --emoji-frightened: "😖";
+  --emoji-ghost: "👻";
+  --emoji-laugh: "😆";
+  --emoji-mindblown: "🤯";
+  --emoji-possessed: "😱";
+  --emoji-sleep: "😴";
+
+  /* Our students! */
+  --student-a: "🤓";
+  --student-b: "🤔";
+  --student-c: "😂";
+}
+
+.student {
+  /* genetics */
+  font-size: var(--size-vertically-challenged);
+  font-family: 'Noto Emoji Color', 'Noto Emoji Monochrome';
+
+  /* center of the universe */
+  line-height: var(--personal-space);
+  text-align: center;
+  vertical-align: middle;
+
+  /* comfort zone */
+  width: var(--personal-space);
+  height: var(--personal-space);
+  margin: 0 0.25em;
+
+  background-color: var(--purple);
+  border-radius: 50%;
+}
+
+/*
+  This assigns a different student based on the student's element index.
+  No clue how to replace existing HTML content, so it's all handled here instead.
+*/
+.student::before {
+  content: var(--student);
+
+  /* Horizontally center by shifting to the left by 50% of the content width */
+  position: absolute;
+  transform: translateX(-50%);
+}
+.student:nth-of-type(1) {
+  --student: var(--student-a);
+}
+.student:nth-of-type(2) {
+  --student: var(--student-b);
+}
+.student:nth-of-type(3) {
+  --student: var(--student-c);
+}
+/* Having a little fun with a hover change */
+.student:hover::before {
+  --student: var(--emoji-barf);
+}
+
+/* Or for choosing a specific student later on */
+.student-a::before {
+  content: var(--student-a);
+}
+.student-b::before {
+  content: var(--student-b);
+}
+.student-c::before {
+  content: var(--student-c);
+}
+
+
+.the-legendary-beacon {
+  --beacon-size: var(--size-glorious);
+
+  /* Praise be flexbox */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  margin: 60px 0;
+
+  /* height may be necessary to specify for final version, width seems fine as-is */
+  /*   
+  width: 100%;
+  height: var(--beacon-size);
+  */
+}
+
+
+/* Wraps a `quote-speaker` with a `blockquote` */
+.quote-container {
+  margin: 60px 0;
+}
+
+.quote-speaker {
+  font-size: 64px;
+  text-align: center;
+
+  /* Could remove these two lines if using a div instead of a span */
+  display:inline-block;
+  width: 100%;
+}
+
+
+.snippet-container {
+  /* Probably an excessive approach to horizontally center the child span? (and not stretch it's bg) */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  /* The child span (title) will bleed into this area to slightly overlap the img */
+  padding-top: 24px;
+  position: relative;
+
+  margin: 16px 0;
+}
+
+.snippet-title {
+  font-size: 32px;
+
+  /* Moves the title into the padded area, bleeding over onto the img content */
+  position: absolute;
+  top: 0;
+
+  /* Improve visibility of the overlapping text, and extend bg a little bit horizontally */
+  background-color: var(--really-dark-blue);
+  padding: 0 2px;
+}
+
+
+/* Should be in the relevant component index.css, but specificity issue :( */
+.lesson-relativity {
+  position: relative;
+  --personal-space: 2em;
+
+  border-width: 0.2rem;
+  border-style: dashed;
+  border-color: hsl(180deg 80% 20%);
+
+  padding: 60px 0;
+  border-radius: 12px;
+}
+
+
+/* This was for the end of the article */
+.the-legendary-beacon.effect-pulse {
+  padding: 40px;
+  --beacon-size: var(--size-legendary);
+  --pulse-color: var(--radiant-purple);
+  height: var(--beacon-size);
+}
+/* hide the emoji from this effect */
+.the-legendary-beacon.effect-pulse > .student::before {
+  content: '';
+}
+
+.the-legendary-beacon > img {
+  width: var(--beacon-size);
+  height: var(--beacon-size);
+  z-index: 1;
+}

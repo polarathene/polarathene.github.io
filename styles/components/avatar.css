@@ -1,0 +1,16 @@
+/* Styles for my Github Avatar at the home page */
+
+.avatar {
+  background-color: var(--not-quite-FFF);
+
+  /*
+    These are the current effect defaults,
+    but they were intended originally for the avatar.
+  */
+  --beacon-size: var(--size-legendary);
+  --pulse-color: var(--turquoise);
+}
+
+.avatar.circle {
+  --size: var(--beacon-size);
+}

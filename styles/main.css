@@ -1,0 +1,133 @@
+@import url(reset.css);
+
+:root {
+  --not-quite-FFF: rgb(240,240,240);
+  --purple: rgb(65, 40, 110);
+  --purple-dimmed: rgb(47, 26, 87);
+  --radiant-purple: rgb(111, 0, 255);
+  --really-dark-blue: hsl(220deg 25% 10%);
+  --turquoise: hsl(170deg 100% 50%);
+  /* Better easing functions: https://easings.net/ */
+  --easing-easeInOutSine: cubic-bezier(0.37, 0, 0.63, 1);
+  --easing-easeInOutQuad: cubic-bezier(0.45, 0, 0.55, 1);
+  --easing-easeInExpo: cubic-bezier(0.7, 0, 0.84, 0);
+  --easing-easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
+  --easing-easeOutBack: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /*
+  --scale-ratio: calc(100vw / 730);
+  --size-vertically-challenged: calc(64 * var(--scale-ratio));
+  */
+  /*
+    This can achieve the same result with font-size and em units
+    as what I attempted to do above. It hits 128px at 640px viewport width.
+    64px == 4rem (browsers typically default to 16px per rem)
+  */
+  --size-vertically-challenged: min(10vw, 4rem);
+}
+
+@media (width <= 600px) {
+  :root {
+    --size-glorious: 128px;
+    --size-legendary: 192px;
+  }
+}
+
+@media (min-width: 600px) {
+  :root {
+    --size-glorious: 192px;
+    --size-legendary: 256px;
+  }
+}
+
+/* Some basic styles */
+body {
+  margin: 20px;
+
+  background-color: var(--really-dark-blue);
+  color: var(--not-quite-FFF);
+
+  font-family: 'Noto Emoji Color', 'Noto Emoji Monochrome', 'Noto Sans', sans-serif;
+  font-size: 24px;
+}
+
+h1, h2 {
+  color: var(--turquoise);
+
+  font-family: 'Bungee', sans-serif;
+  font-size: 60px;
+  font-weight: 400;
+
+  margin-bottom: 12px;
+}
+
+
+/* Blockquote styles, presently biased to technical blog post */
+/* https://css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/ */
+blockquote::before {
+  content: open-quote;
+}
+
+blockquote::after {
+  content: close-quote;
+}
+
+blockquote {
+  quotes: "“" "”" "‘" "’";
+  text-align: center;
+
+  font-size: 64px;
+  font-family: 'Liberation Serif', serif;
+  font-style: italic;
+}
+
+/* Text formatting */
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 700;
+}
+
+.strike-through {
+  text-decoration: line-through;
+}
+
+
+.highlight {
+  font-weight: 700;
+  color: crimson;
+}
+
+/* Just a more eye catching signal for those who don't have time to read walls of text */
+.attention {
+  text-align: center;
+  font-weight: 700;
+  color: crimson;
+  font-size: 4rem;
+  margin-top: 50px;
+}
+
+/*
+ * Center the content horizontally and vertically:
+ */
+
+html {
+  height: 100%;
+}
+/* I miss being able to use nested selectors */
+html > body {
+  min-height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  --size: var(--size-legendary);
+  width: var(--size);
+  height: var(--size);
+
+  border-radius: 50%;
+}

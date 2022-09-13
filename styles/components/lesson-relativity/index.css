@@ -1,0 +1,54 @@
+@import url(/styles/components/lesson-relativity/astral-project.css);
+@import url(/styles/components/lesson-relativity/levitate.css);
+
+/* An nteractive component for the HTML & CSS blog post */
+
+.lesson-relativity > .student,
+.student.levitate:hover::before {
+  background-color: var(--purple-dimmed);
+  border-radius: 12px;
+
+  /* NOTE:
+    CSS dashed borders provide no control over presentation like spacing and length,
+    Presentation may vary across browsers, if needing more control use SVG.
+  */
+  border-width: 0.06em;
+  border-style: dashed;
+  border-color: var(--radiant-purple);
+}
+
+.lesson-relativity:not(:has(.student:hover)) > .student {
+  --student: var(--emoji-sleep);
+}
+
+.student.astral-project:hover::before {
+  --student: var(--emoji-possessed);
+}
+
+
+/* Neat trick to update siblings based on the target being hovered */
+/* NOTE: `:has()` is presently not supported by Firefox */
+.lesson-relativity:has(.student.astral-project:hover) {
+  animation: react-to-possessed 3s;
+  animation-fill-mode: forwards;
+}
+.lesson-relativity:has(.student.levitate:hover) {
+  animation: react-to-ascension 6s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes react-to-possessed {
+  to {
+    --student-a: var(--emoji-laugh);
+    --student-b: var(--emoji-frightened);
+    --student-c: var(--emoji-crying);
+  }
+}
+
+@keyframes react-to-ascension {
+  to {
+    --student-a: var(--emoji-celebrate);
+    --student-b: var(--emoji-curious);
+    --student-c: var(--emoji-mindblown);
+  }
+}

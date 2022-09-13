@@ -1,0 +1,54 @@
+/*
+  Tilts the object on a slight angle for a 3D effect
+*/
+
+.effect-tilt {
+  --tilt-angle: 36deg;
+  --tilt-angle-negative: calc(var(--tilt-angle) * -1);
+  /* A nicer easing function (slightly bounces back): https://easings.net/#easeOutBack */
+  --easing-easeOutBack: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --tilt-easing: var(--easing-easeOutBack);
+
+  /* rotateZ provides a slight "tilt" for the rotateY change on hover */
+  transform: rotateZ(var(--tilt-angle));
+  transition: transform 0.5s var(--tilt-easing);
+
+  /* 
+    Gives the "depth" to project outwards with translateZ,
+    also affects layer rendering order by sorting against z-depth.
+  */
+  transform-style: preserve-3d;
+  /* Adjusts the actual perspective skewing, rather than just movement */
+  perspective: 512px;
+}
+
+.effect-tilt:hover {
+  transform: rotateZ(var(--tilt-angle)) rotateY(-30deg);
+}
+
+/*
+  NOTE: This is required for the `rotateZ()` for the tilt,
+  while `translateZ()` provides the pop effect.
+  Both are part of `transform` property, thus cannot be separated for a `transition` target,
+  could be fixed by using the `animation` property instead?
+
+  Provides an additional effect delayed until the main tilt effect begins.
+  Pushes the child forward in 3D-space a little bit.
+*/
+.effect-tilt > .effect-pop-after-tilt {
+  /* 
+    translateZ needs to accomodate for the easing function overshooting the
+    original z-depth a bit, which would clip beneath the containers white circle bg.
+
+    rotateZ is to counter the containers (for tilt effect),
+    so this graphic is oriented correctly.
+  */
+  transform: rotateZ(var(--tilt-angle-negative)) translateZ(8px);
+  transition: transform 0.3s var(--tilt-easing);
+  /* Wait until the container has started tilting first */
+  transition-delay: 0.15s;
+}
+
+.effect-tilt:hover > .effect-pop-after-tilt {
+  transform: rotateZ(var(--tilt-angle-negative)) translateZ(64px);
+}

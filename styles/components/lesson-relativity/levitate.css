@@ -1,0 +1,212 @@
+/* An animation specifically tailored for the `html-css.html` blog post */
+
+
+/*
+  Simulate `position: absolute` visually (with smooth transition animation)
+  by animating content width (+ border + horizontal margin) to 0.
+*/
+
+.student.levitate:hover {
+  /* This should be `position: static`, otherwise the pseudo-elements won't play well */
+  animation: disappearing-act 0.3s;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+  animation-timing-function: var(--easing-easeOutBack);
+
+  /* Hide these, looks ugh while collapsing - The `::before` style will reproduce them */
+  background-color: unset;
+  border: unset;
+}
+
+/*
+  This effect is only intended for a horizontal transition with the 3 students, as
+  affecting vertical dimensions throws off the dependent animations positioning..
+*/
+@keyframes disappearing-act {
+  to {
+    width: 0;
+
+    /*
+      Margin works better for this purpose than the `gap` property of flexbox/grid does,
+      which would not change since the item is still present in the document.
+    */
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.student.levitate:hover::before {
+  /* Remove the emoji face (moved to ::after) */
+  content: '';
+
+  /* Re-create the BG style for our misdirection */
+  width: var(--personal-space);
+  height: var(--personal-space);
+
+  position: absolute;
+  transform: translateX(-50%);
+
+  animation: disappearing-act-misdirection 1.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: var(--easing-easeOutExpo);
+}
+
+/* Make our fake background + border replacement disappear fluidly in front of the audiences eyes */
+@keyframes disappearing-act-misdirection {
+  to {
+    transform: translateX(-50%) scale(0.4);
+    opacity: 0;
+  }
+}
+
+
+/*
+  The next phase will have the emoji levitate, after recovering from a fall
+*/
+
+.student.levitate:hover::after {
+  /* We're falling! Migrate the student content (from ::before) */
+  --student: var(--emoji-falling);
+  content: var(--student);
+
+  /* Don't allow the document flow to interrupt our meditation */
+  position: absolute;
+
+  /*
+    50% of this pseudo-elements width, centering it on the vertical axis.
+    This allows combining with `left: 0` for example to snap the middle of the emoji
+    onto the border of the containing parent element (that has `position: relative`).
+
+    NOTE: this transform causes shaking/jitter during width collapse, embraced it as
+    an added effect of the animation by falling and "powering up" to soar back up.
+    I cannot reproduce on phone, might be a rounding issue, only sometimes happens on
+    desktop chrome browser.
+  */
+  transform: translateX(-50%);
+
+  /*
+    Extend height to match the containing parents, so translateY(50%) will have our
+    student fall from the middle to the bottom edge of the containing parent.
+  */
+  height: 100%;
+  line-height: 100%;
+
+  /*
+    Keep emoji in original vertical center start position:
+    (probably breaks when `--personal-space` is not 2em)
+  */
+  /* bottom: calc(50% - var(--size-vertically-challenged)); */
+  /*
+    Then later in the animation keyframes to replace `--pummet` transform,
+    Set the fall offset to be at border edge of containing parent:
+  */
+  /* bottom: calc(0% - var(--size-vertically-challenged)); */
+
+  /*
+    Equivalent for `height: 100%; line-height: 100%`, this version skips `height: 100%`.
+    Much simpler as `line-height: 100%` does not require to accomodate for padding.
+  */
+  /* line-height: 100%;
+  bottom: 50%; */
+  /*
+    Then later in the animation keyframes to replace `--pummet` transform,
+    Set the fall offset to be at border edge of containing parent:
+  */
+  /* bottom: 0; */
+  /* and then again for `--fall-recover`, but keep `--fall-float-aimlessly` */
+  /* bottom: 50%; */
+
+
+  /* NOTES: Observations:
+    - `vertical-align` does not work in `position: absolute`?
+    - `vertical-align` in pseudo-element aligns the pseudo line-height within
+      the elements non-pseudo line-height, not the non-pseudo height?
+    - The pseudo-element line-height at 100% is based on it's content,
+      but 100% height by it's non-pseudo height.
+    - The pseudo-elements height and width affect it's % unit value with `transform`,
+      not the elements non-pseudo dimensions.
+
+    - If there is enough width for this pseudo-element,
+      you can horizontally align the emoji in that width with `text-align: center`,
+      or align the content width against the containing parent (`position: relative`)
+      bounds with `left: 0` for an edge, `left: 50%` to center within the parent.
+
+    - If this were `position: relative` with:
+      - `display: block` it'd inherit the `width` of the non-pseudo content.
+      - `display: inline-block` it'd have a `width` of this pseudo content.
+      - `display: inline` (default inherited), width is this pseudo content,
+         but cannot use transform. `top`/`left`/etc would work - except % unit?
+         (seems to be due to overflow, visible via background-color)
+  */
+
+
+  /* 3 animations in a staggered sequence, the final one looping */
+  animation: sudden-rabbit-hole, rise-to-greatness, find-enlightenment;
+  animation-duration: 0.5s, 3s, 2s;
+  animation-delay: 0.2s, 1.5s, 4s;
+  /* 
+    `forwards` will retain the state of the changes from the last frame played,
+     instead of resetting to original values
+  */
+  animation-fill-mode: forwards;
+  /* Alternating iterations for the last animation will give that floating effect */
+  animation-direction: alternate;
+  animation-iteration-count: 1, 1, infinite;
+  /* 
+    Easing with sine also provides a subtle timing curve for
+     the floating to not seem overly bouncy
+  */
+  animation-timing-function: var(--easing-easeInExpo), var(--easing-easeOutExpo), var(--easing-easeInOutSine);
+
+  /* All three vertical targets:
+     - fall distance
+     - return to a little higher than we fell
+     - dip down by a similar offset and alternate between forever and ever
+  */
+  --centered: -50%;
+  --fall-plummet: translateX(var(--centered)) translateY(50%);
+  --fall-recover: translateX(var(--centered)) translateY(-0.25em);
+  --fall-float-aimlessly: translateX(var(--centered)) translateY(0.25em);
+}
+
+/*
+  Fall half the height of the element, or inherited height.
+  Use `height: 100%` on the `::after` styles for this animation to fall 
+  to the bottom of the containing parent (nearest `position: relative`).
+*/
+@keyframes sudden-rabbit-hole {
+  to {
+    transform: var(--fall-plummet);
+    /* bottom: 0; */
+  }
+}
+
+@keyframes rise-to-greatness {
+  0% {
+    transform: var(--fall-plummet);
+    /* bottom: 0; */
+
+    /* Change expression at start of animation */
+    /* --student: var(--emoji-calm); */
+    /*
+      BUG - Firefox (desktop + android) does not update the student
+      unless explicitly setting the `content`.
+      NOTE: `content: var(--student);` would also apply the change,
+      just not the CSS var itself (works on Chrome desktop + android).
+    */
+    content: var(--emoji-calm);
+  }
+  100% {
+    transform: var(--fall-recover);
+    /* bottom: 50%; */
+
+    /* Keep this expression afterwards via `animate-fill-mode: forwards`*/
+    content: var(--emoji-calm);
+  }
+}
+
+@keyframes find-enlightenment {
+  to {
+    transform: var(--fall-float-aimlessly);
+  }
+}
