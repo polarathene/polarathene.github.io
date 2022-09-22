@@ -1,0 +1,173 @@
+/*
+ * prism.js polarathene for JavaScript
+ * Based on:
+   - prism.js base theme: https://github.com/PrismJS/prism/blob/master/themes/prism-tomorrow.css
+   - colour inspiration: https://github.com/enkia/tokyo-night-vscode-theme
+ * @author Brennan Kinney
+ */
+
+code[class*='language-'],
+pre[class*='language-'] {
+  background: none;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  /* Standard font colour outside of spans with tokens */
+  color: #ba9bf7;
+  /* Responsive font scaling like in typography.css */
+  font-size: clamp(0.7rem, 3vw, 1rem);
+  line-height: 1.5;
+  /* Themed with Noto Sans Mono Light: */
+  font-family: 'Noto Sans Mono Light', Consolas, Monaco, 'Andale Mono',
+    'Ubuntu Mono', monospace;
+  /*
+     Light (300) is what I themed for, looks better on higher DPI displays.
+     Regular (400) is thicker/smoother but colours a bit too bright/intense.
+   */
+  font-weight: 300;
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+/* Code snippet background with rounded corners */
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: #1b1c2d;
+  border-radius: 8px;
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+/* Changed/tested only for `comment` */
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #424868;
+}
+
+/* Punctuation chars: ()[],; */
+.token.punctuation {
+  color: #45a2d8;
+}
+
+/* Untouched, not applicable to my snippets */
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+  color: #e2777a;
+}
+
+/* Untouched, doesn't appeaer to target JS function names */
+.token.function-name {
+  color: #6196cc;
+}
+
+/* Changed/tested only for `number` */
+.token.boolean,
+.token.number {
+  color: #ff9d63;
+}
+
+/*
+   The actual function name + function variable (eg: arrow syntax assignement)
+   Only `function` was defined in original theme.
+ */
+.token.function,
+.token.function-variable {
+  /* color: #7aa2f7; */
+  color: #ff7ecc;
+}
+
+/* function parameters - not defined in origional theme */
+.token.parameter {
+  /* color: #e0af68;
+   color: #ec5252; */
+  color: #6affb9;
+}
+
+/* Original colour, untested, may be appropriate to use same as `property` */
+.token.class-name,
+.token.constant,
+.token.symbol {
+  color: #f8c555;
+}
+
+/* Object literal property keys, `literal-property` was not defined */
+.token.property,
+.token.literal-property {
+  /* color: #74daca; */
+  color: #27ffb8;
+}
+
+/* Changed/tested only for `keyword` */
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+  /* color: #9e7bd8; */
+  color: #835dc1;
+  font-style: italic;
+}
+
+/* Changed/tested only for `string` */
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+  /* color: #9ece6a; */
+  color: #8af463;
+}
+
+/* Changed/tested only for `operator` */
+.token.operator,
+.token.entity,
+.token.url {
+  /* color: #ffdc89; */
+  /* color: #89ddff; */
+  color: #645cc4;
+}
+
+.token.important,
+.token.bold {
+  font-weight: 700;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.inserted {
+  color: green;
+}

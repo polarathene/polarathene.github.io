@@ -27,6 +27,8 @@
   background-color: rgb(27, 107, 210);
   border-radius: 8px;
   padding: 8px 16px;
+
+  color: var(--not-quite-FFF);
 }
 
 /*
@@ -36,16 +38,21 @@
   another student from taking that column in the same row.
 */
 .conversation > p:nth-of-type(even) {
-  margin-left: var(--side-column-width);
-
   border-top-right-radius: 4px;
   border-bottom-right-radius: 20px;
 }
 .conversation > p:nth-of-type(odd) {
-  margin-right: var(--side-column-width);
-
   border-top-left-radius: 4px;
   border-bottom-left-radius: 20px;
+}
+
+@media (min-width: 500px) {
+  .conversation > p:nth-of-type(even) {
+    margin-left: var(--side-column-width);
+  }
+  .conversation > p:nth-of-type(odd) {
+    margin-right: var(--side-column-width);
+  }
 }
 
 /* Student columns */

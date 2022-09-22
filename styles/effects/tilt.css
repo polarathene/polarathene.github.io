@@ -5,8 +5,7 @@
 .effect-tilt {
   --tilt-angle: 36deg;
   --tilt-angle-negative: calc(var(--tilt-angle) * -1);
-  /* A nicer easing function (slightly bounces back): https://easings.net/#easeOutBack */
-  --easing-easeOutBack: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* A nicer easing function (slightly bounces back) */
   --tilt-easing: var(--easing-easeOutBack);
 
   /* rotateZ provides a slight "tilt" for the rotateY change on hover */

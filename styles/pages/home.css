@@ -3,15 +3,59 @@
 /* Import after effects for any overrides to work */
 @import url(/styles/components/avatar.css);
 
-#about {
-  display: flex;
+main {
+  height: 100%;
+  max-width: 900px;
 }
 
-#about > div {
+h1 {
+  margin: 0;
+  text-align: left;
+}
+
+.avatar {
   margin: 30px;
 }
 
-/* just temporary fixed width for cleaner text boundary against the avatar element */
-.introduction {
-  width: 540px;
+/*
+  Margin to prevent avatar sharing a row
+  until media query switch over.
+*/
+#introduction {
+  margin: 0 6vw;
+}
+
+#blogs {
+  /* Fixed order to accomodate the shifting order of `.avatar` */
+  order: 2;
+
+  /* NOTE: This is compatible with `position: absolute`: */
+  align-self: self-end;
+}
+
+@media (min-width: 960px) {
+  /*
+    Not sure what introduces the horizontal scroll bar
+    at around 960-1050px
+  */
+  html {
+    overflow-x: hidden;
+  }
+
+  main {
+    /* Changing direction flips align/justify axis */
+    /* flex-direction: row; */
+
+    /* Vertically collapse content items spacing to bundle them into the center */
+    /* Overrides align-items, which allows flex items to customize via align-self */
+    align-content: center;
+  }
+
+  .avatar {
+    order: 1;
+  }
+
+  #introduction {
+    margin: 0;
+  }
 }

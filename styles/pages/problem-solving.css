@@ -1,0 +1,14 @@
+/* Used at the end of the article */
+ul.thought-list {
+  margin-top: 40px;
+}
+
+ul.thought-list > li {
+  margin-bottom: 24px
+}
+
+ul.thought-list li > strong:first-child ~ p {
+  margin: 8px auto;
+  font-size: 85%;
+  margin-left: 4px;
+}

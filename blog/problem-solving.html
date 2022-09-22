@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EDA student blog - Brennan Kinney</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link href="/styles/main.css" rel="stylesheet" type="text/css">
+    <link href="/styles/pages/problem-solving.css" rel="stylesheet" type="text/css">
+    <script src="/main.js"></script>
+    <link href="/styles/components/prism-polarathene.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div>
+      <button id='nav-btn' type="button">Menu</button>
+      <nav id="nav-menu">
+        <section id="blogs">
+          <h2>Blog Posts</h2>
+          <div class="layout">
+            <section>
+              <h3># Tech</h3>
+              <ol>
+                <li><a href="/blog/html-css.html">HTML & CSS</a></li>
+                <li><a href="/blog/javascript-dom.html">Javascript and the DOM</a></li>
+                <li><a href="/blog/problem-solving.html">Problem Solving</a></li>
+              </ol>
+            </section>
+            <section>
+              <h3># Core</h3>
+              <ol>
+                <li><a href="/blog/identity-values.html">Identity, Values and Strengths Exploration</a></li>
+                <li><a href="/blog/learning-plan.html">Learning Plan</a></li>
+                <li><a href="/blog/emotional-intelligence.html">Emotional Intelligence (EQ)</a></li>
+                <li><a href="/blog/neuroplasticity.html">Neuroplasticity</a></li>
+              </ol>
+            </section>
+          </div>
+        </section>
+        <a href="/index.html">Go Home</a>
+      </nav>
+    </div>
+    <main>
+      <article class="simple">
+        <h1>Problem Solving</h1>
+        <section>
+          <h2>Blocked on a simple problem</h2>
+          <section>
+            <h3>What was the problem?</h3>
+            <ul>
+              <li>Assisting with a question about an infinite loop / crash.</li>
+              <li>A <code>for</code> loop that decrements a countdown to iterate through an array backwards, without using alternative functional methods to do the iteration.</li>
+              <li>The browser console was not outputting any <code>console.log()</code> within the loop.</li>
+            </ul>
+            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="1,5"></pre>
+            <video autoplay muted loop>
+              <source src="/assets/page/problem-solving/strange-endlessly.webm" type="video/webm">
+              <source src="/assets/page/problem-solving/strange-endlessly.mp4" type="video/mp4">
+            </video>
+          </section>
+          <section>
+            <h3>What problem-solving techniques did you use?</h3>
+            <p>Reproducing locally by trying it with <code>console.log()</code>, but checking for <code>i !== 0</code>, not <code>i &lt; array.length</code>.</p>
+            <p>Also MDN docs on the <code>for</code> loop syntax to verify how the condition toggles loop iteration, as I had confused myself when originally trying to help advise with a rubber ducky-like approach :grimacing:</p>
+            <p>First simplify the problem with rubber ducky, we can take away the variables and just focus on the values we're starting the loop with:</p>
+            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="13,23"></pre>
+            <p>As <code>3</code> is decrementing each loop, the condition will always be <code>&lt; 4</code>, never changing to stop the loop.</p>
+            <video autoplay muted loop>
+              <source src="/assets/page/problem-solving/strange-bargain.webm" type="video/webm">
+              <source src="/assets/page/problem-solving/strange-bargain.mp4" type="video/mp4">
+            </video>
+            <p>For a sanity check on how the loop condition worked, I wrote a little code to try that wouldn't result in an infinite loop:</p>
+            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="27,39"></pre>
+            <p>Success! :partying_face:</p>
+          </section>
+          <section>
+            <h3>How did you feel throughout the process?</h3>
+            <p>Embarrased that I wasn't sure myself, and had to give it a try to verify :joy:</p>
+            <p>I also realized that my answer for this exercise was wrong, because I did not read the question properly! (<em>use a <code>for</code> loop that decrements</em>):</p>
+            <pre class="language-js"><code>
+              countdown.reverse().forEach((item) => console.log(item))
+            </code></pre>
+          </section>
+          <section>
+            <h3>What did you learn?</h3>
+            <p>The <code>for</code> loop iteration condition will exit the loop when it is no longer <code>true</code>.</p>
+            <p>Breaking down the <code>for</code> loop syntax into each iteration as code instead, helped think about what was going on and explain the infinite loop bug better:</p>
+            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="47,62"></pre>
+          </section>
+        </section>
+        <section>
+          <h2>Elegantly solved a problem</h2>
+          <section>
+            <h3>What was the problem?</h3>
+            <p>A game where you change the colours of circles, where each colour was tallied, but was not providing an accurate tally of what the user saw.</p>
+            <p>Here was the original code related to the bug:</p>
+            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="5,22"></pre>
+          </section>
+          <section>
+            <h3>What problem-solving techniques did you use?</h3>
+            <p>The cause was found via inspecting the DOM in the browser dev-tools while reproducing the bug.</p>
+            <p>Turned out that some circles would have multiple <em>CSS colour classes</em> assigned - when only a single class was expected!</p>
+            <p>I wrote a few solutions to try, and discussed different approaches with my peers as we shared what worked for us.</p>
+            <p>Later, I thought about taking it a step further. To create a more flexible solution that:</p>
+            <ol>
+              <li>Should not interfere with other CSS classes unrelated to the feature.</li>
+              <li>Would not require to copy/paste code across effectively the same function when making updates, or adding support for new colours.</li>
+            </ol>
+            <p>This was my final solution that I was happy with:</p>
+            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="30,52"></pre>
+            <ul>
+              <li>This function takes a CSS class name and generates a new function variant (as a closure) to return, simplifying function definitions/updates for this feature.</li>
+              <li>The array used to create <code>filtered</code> could instead be defined external of the function, or just updated in-place in it's current form when supporting new colour classes. <code>filtered</code> contains all the supported classes, except the one the generated function will handle (<code>classToToggle</code>).</li>
+              <li>This isn't an efficient solution as the <code>filtered</code> list gets larger, but I think it's good enough for the purpose and easy enough to understand how it works, that it's an "elegant" solution.</li>
+            </ul>
+          </section>
+          <section>
+            <h3>How did you feel throughout the process?</h3>
+            <p>Confident.</p>
+            <p>Although it took me a while to figure out how to approach the removal nicely. Originally I tried a <code>switch () { ... }</code> statement, but it didn't seem very DRY? <em>(Plus the loop had no context of what not to remove)</em>:</p>
+            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="59,85"></pre>
+          </section>
+          <section>
+            <h3>What did you learn?</h3>
+            <ul>
+              <li>Improving functionality should try avoid over-complicating if the cost of readability outweighs the benefit of the solution.</li>
+              <li>A maintainable solution is good enough. Optimizing further should only be considered when there is evidence to support that it would be worth the investment of time and/or added complexity involved.</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h2>Thoughts on various problem-solving techniques</h2>
+          <ul class="thought-list">
+            <li>
+              <strong>Pseudocode:</strong>
+              <p>Great way to rough out a plan of attack :+1:</p>
+            </li>
+            <li>
+              <strong>Trying something:</strong>
+              <p>Very helpful!</p>
+              <p>Figuring out how to do portions of the task by learning and trying how to write smaller functionality, and then integrating it all together :sunglasses:</p>
+            </li>
+            <li>
+              <strong>Rubber ducky method:</strong>
+              <p>I find this complements the previous two techniques quite well.</p>
+              <p>I often pose some questions, breaking it down and thinking about how to answer those helps quite a bit!</p>
+            </li>
+            <li>
+              <strong>Reading error messages:</strong>
+              <p>They're magical once you can decipher what they're throwing a fuss about :sweat_smile:</p>
+            </li>
+            <li>
+              <strong>Using <code>console.log()</code>:</strong>
+              <p>Praise be to my <em><a href="https://en.wikipedia.org/wiki/Law_of_the_instrument">Masolow's hammer</a>!</em></p>
+              <p>May I bathe in the blissful ignorance of not knowing better debugging tools :joy:</p>
+            </li>
+            <li>
+              <strong>Googling:</strong>
+              <p>Almost always reliable <em>(given sufficient time and effort)</em>.</p>
+              <p>A solid first step to external assistance before disturbing the living.</p>
+            </li>
+            <li>
+              <strong>Asking your peers for help:</strong>
+              <p>One of my last avenues.. and often unfruitful when I've already exhausted previous options.</p>
+              <p>However when it's an area of knowledge new to me that isn't too niche, and especially under the pressure of time, I think reaching out sooner has a higher chance of success.</p>
+              <p>Sometimes I will seek guidance from peers early, while I investigate and learn solo, getting a response is a bonus :)</p>
+            </li>
+            <li>
+              <strong>Asking coaches for help:</strong>
+              <p>This is kind of the same as peers, just more experienced?</p>
+              <p>When available, I would reach out when I've been stuck and not having luck with anything else thus far.</p>
+            </li>
+            <li>
+              <strong>Improving your process with reflection:</strong>
+              <p>This is quite helpful too.</p>
+              <p>I try to reflect afterwards <em>(time permitting)</em>, and write down notes about anything useful, collect some snippets of code or add links related to the topic.</p>
+              <p>I may not ever need the information again, or it could be years away and become outdated, but when I do, wow, thank you past me! :heart:</p>
+            </li>
+          </ul>
+        </section>
+      </article>
+    </main>
+    <!-- prism.js scripts for loading code snippets and highlighting them -->
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/file-highlight/prism-file-highlight.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  </body>
+</html>

@@ -2,23 +2,9 @@
 @import url(/styles/components/chat.css);
 @import url(/styles/components/lesson-relativity/index.css);
 
-h1 {
-  font-size: 46px;
-}
-
+/* For the `WIP` header */
 h2 {
-  font-size: 32px;
   text-align: center;
-}
-
-article {
-  max-width: 800px;
-  margin-bottom: 200px;
-}
-
-p {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 /*
@@ -158,7 +144,8 @@ p {
 }
 
 .quote-speaker {
-  font-size: 64px;
+  /* Typical range of 32px to 64px */
+  font-size: clamp(2rem, 8vw, 4rem);
   text-align: center;
 
   /* Could remove these two lines if using a div instead of a span */

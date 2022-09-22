@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EDA student blog - Brennan Kinney</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link href="/styles/main.css" rel="stylesheet" type="text/css">
+    <script src="/main.js"></script>
+    <link href="/styles/components/prism-polarathene.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div>
+      <button id='nav-btn' type="button">Menu</button>
+      <nav id="nav-menu">
+        <section id="blogs">
+          <h2>Blog Posts</h2>
+          <div class="layout">
+            <section>
+              <h3># Tech</h3>
+              <ol>
+                <li><a href="/blog/html-css.html">HTML & CSS</a></li>
+                <li><a href="/blog/javascript-dom.html">Javascript and the DOM</a></li>
+                <li><a href="/blog/problem-solving.html">Problem Solving</a></li>
+              </ol>
+            </section>
+            <section>
+              <h3># Core</h3>
+              <ol>
+                <li><a href="/blog/identity-values.html">Identity, Values and Strengths Exploration</a></li>
+                <li><a href="/blog/learning-plan.html">Learning Plan</a></li>
+                <li><a href="/blog/emotional-intelligence.html">Emotional Intelligence (EQ)</a></li>
+                <li><a href="/blog/neuroplasticity.html">Neuroplasticity</a></li>
+              </ol>
+            </section>
+          </div>
+        </section>
+        <a href="/index.html">Go Home</a>
+      </nav>
+    </div>
+    <main>
+      <article class="simple">
+        <h1>Javascript and the DOM</h1>
+        <section>
+          <h2>An analogy to describe JavaScript and its relationship to HTML and CSS</h2>
+          <p>The content of an HTML file describes the structure of a document. It provides contextual meaning to the text it contains, possibly with some images and links to reference other relevant documents.</p>
+          <p>That contextual meaning for text and other content allows software like a web browser to better understand and present the content to you the reader. But HTML does not communicate how to display larger text for headings, if the text should use columns, or how that text interacts with imagery, nor where that imagery should be located on the screen. This is the role of CSS, it provides control over how the website will look.</p>
+          <p>A good way to visualize this collaboration is a newspaper:</p>
+          <img src="/assets/page/js-dom/newspaper.webp" />
+          <p>Before laying out all that content for a page, you would have it in a simpler form first. The image, different articles with paragraphs and their headings, references to other pages (your links).</p>
+          <p>CSS is what has the text flow in columns and in the bottom right, wrap around the image. The HTML content is unaware of this and doesn't need to be split up when a pragraph splits at the end of one column in our newspaper and starts at the top of a new column.</p>
+          <p>Today we find the news on the web or our phones, but HTML and CSS isn't quite enough. We interact with the content, controlling playback of a video, expressing an opinion through a comment section or hitting up a search field that responds with suggestions as we type. Javascript fulfills this role, providing or enhancing the functionality to serve these experiences.</p>
+        </section>
+        <section>
+          <h2>Control flow using an example from everyday life</h2>
+          <p>Control flow in programming is how we navigate through the code as it is processing, what path it takes. Sort of like how you would read through a newspapers columns and find a reference to read more on another page that you flip to before you finish reading the current page.</p>
+          <p>Initially, the control flow is pretty simple. We start at the top of the file and we work our way down line by line.</p>
+          <p>There are some control structures that can interrupt that flow, such as conditionals, functions, and loops.</p>
+          <ul>
+            <li>Conditional statements as the name implies will only allow some code to run when an expectation is met.</li>
+            <li>Functions we will cover later in the article, but are similar to our page jumping with the newspaper, they perform an action somewhere else before continuing forward.</li>
+            <li>Loops define a section of code that can be repeated multiple times, which is suitable for condensing code exhibiting a sequential pattern.</li>
+          </ul>
+          <p>A bus traveling along it's daily route is a good example of control flow playing out in the real world:</p>
+          <ol>
+            <li>Drive along the route.</li>
+            <li>If a passenger signals they want to leave, drop them off at the next bus stop.</li>
+            <li>If approaching a bus stop, and someone signals the bus driver, pick them up.</li>
+            <li>Else continue driving. Repeat from step 1 until route is completed.</li>
+          </ol>
+          <p>And that might translate to something like this in code:</p>
+          <pre class="language-js" data-src="/assets/page/js-dom/snippets/control-flow.js" data-range="1,31"></pre>
+          <pre class="language-js" data-src="/assets/page/js-dom/snippets/control-flow.js" data-range="33,59"></pre>
+        </section>
+        <section>
+          <h2>What the DOM is and how to interact with it</h2>
+          <p>The Document Object Model (DOM) is a representation of the webpage that can be accessed via Javascript.</p>
+          <p>It has the global variable <code>document</code> and many useful methods, for example:</p>
+          <pre class="language-js" data-src="/assets/page/js-dom/snippets/dom.js"></pre>
+        </section>
+        <section>
+          <h2>The difference between accessing data from arrays and objects</h2>
+          <p><strong>Arrays</strong> provide sequential sets of data that we can access by querying an index. Like a number in a queue or waiting list. We do this with the variable name followed by brackets:</p>
+          <p><code>pages[3]</code> would be the fourth item in the <code>pages</code> array. It is the fourth because the index starts incrementing from 0, rather than 1.</p>
+          <p><strong>Objects</strong> are similar to arrays, but rather than storing data as a list with an index, a value of data is associated to a <em>"key"</em>, also known as a <em>"property"</em> of the object.</p>
+          <p>Typically <em>"dot notation"</em> syntax is used when referring to an explicit object key, such as <code>book.pages</code>, but you can also use <em>"bracket notation"</em> syntax instead with the key as a string; <code>book["pages"]</code> - that is more useful when the provided key is better suited as a variable, such as when used in loops or functions.</p>
+          <p>Objects like arrays can also be nested, and both can contain each other too.</p>
+          <p>Here is an example of a <code>book_of_animals</code> object, with <code>chapters</code> and <code>pages</code> for the object keys, both which use an array as the value assigned:</p>
+          <pre class="language-js" data-src="/assets/page/js-dom/snippets/array-objects.js" data-range="1,32"></pre>
+          <pre class="language-js" data-src="/assets/page/js-dom/snippets/array-objects.js" data-range="34,55"></pre>
+          <ul>
+            <li><code>chapters</code> is an array of objects, and <code>pages</code> and array of strings.</li>
+            <li><code>chapters</code> provides data about each chapter in the book. The title, and what page it starts from, like in a Table of Contents page.</li>
+            <li><code>pages</code> represents the content of each page - in this case a single word.</li>
+            <li>In the functions <code>readChapter()</code> and <code>readPages()</code> we mix "dot notation" of object access with the index access of arrays to query the information needed to read all pages in a chapter.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>What functions are and why they are helpful</h2>
+          <p>When we write code and a section of it is to perform a specific task, that code can be grouped together into what is known as a function.</p>
+          <p>This is especially useful if we would have previously copy and pasted that the same code to perform that task again somewhere in our program. We have one common place to share the code when it is a function, and using it elsewhere is now only a single line! How awesome is that?</p>
+          <p>Beyond recycling our code and making it easier on ourselves to get a summary of what is going on; functions can also accomodate small changes with parameters. We can use these like variables, they are an input into the function, and our function can provide an output too if that'd be useful for what we're doing. Oh, and you can put functions within your functions of course!</p>
+          <p>This is what makes functions powerful tools in programming. We can make smaller functions that do different tasks, and compose them together to achieve a bigger task:</p>
+          <pre>-- An example should be here --</pre>
+          <p>And since these functions are so flexible, we can mix up that composition and change the inputs too!:</p>
+          <pre>-- An example should be here --</pre>
+        </section>
+      </article>
+    </main>
+    <!-- prism.js scripts for loading code snippets and highlighting them -->
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/file-highlight/prism-file-highlight.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  </body>
+</html>

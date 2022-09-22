@@ -1,4 +1,6 @@
 @import url(reset.css);
+@import url(/styles/components/typography.css);
+@import url(/styles/components/nav.css);
 
 :root {
   --not-quite-FFF: rgb(240,240,240);
@@ -39,89 +41,54 @@
   }
 }
 
-/* Some basic styles */
-body {
-  margin: 20px;
-
-  background-color: var(--really-dark-blue);
-  color: var(--not-quite-FFF);
-
-  font-family: 'Noto Emoji Color', 'Noto Emoji Monochrome', 'Noto Sans', sans-serif;
-  font-size: 24px;
-}
-
-h1, h2 {
-  color: var(--turquoise);
-
-  font-family: 'Bungee', sans-serif;
-  font-size: 60px;
-  font-weight: 400;
-
-  margin-bottom: 12px;
-}
-
-
-/* Blockquote styles, presently biased to technical blog post */
-/* https://css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/ */
-blockquote::before {
-  content: open-quote;
-}
-
-blockquote::after {
-  content: close-quote;
-}
-
-blockquote {
-  quotes: "“" "”" "‘" "’";
-  text-align: center;
-
-  font-size: 64px;
-  font-family: 'Liberation Serif', serif;
-  font-style: italic;
-}
-
-/* Text formatting */
-em {
-  font-style: italic;
-}
-
-strong {
-  font-weight: 700;
-}
-
-.strike-through {
-  text-decoration: line-through;
-}
-
-
-.highlight {
-  font-weight: 700;
-  color: crimson;
-}
-
-/* Just a more eye catching signal for those who don't have time to read walls of text */
-.attention {
-  text-align: center;
-  font-weight: 700;
-  color: crimson;
-  font-size: 4rem;
-  margin-top: 50px;
-}
-
 /*
- * Center the content horizontally and vertically:
- */
+  Center the content horizontally and vertically:
+*/
 
 html {
+  /*
+    When vertical scrollbar is present on desktop, it overlays the viewport
+    thus a horizontal scrollbar will be present too.
+    (verical scrollbar is about about 16px wide? May vary by settings / OS)
+  */
+  min-width: 320px;
   height: 100%;
 }
 /* I miss being able to use nested selectors */
 html > body {
+  height: 100%;
+}
+
+main {
   min-height: 100%;
 
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+
+  /* Centers items along the same axis across peers on that axis */
   align-items: center;
+  /* Vertically distribute height equally across the items */
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+
+/* Centered videos and embedded youtube iframes */
+video, iframe {
+  max-width: 90%;
+
+  /* Minimize introducing black bars due to aspect ratio */
+  height: min(40vw, 320px);
+  min-height: 160px;
+
+  display: block;
+  border-radius: 8px;
+
+  margin: 40px auto;
+}
+/* Breaks my `video` content as it's not using `object-fit: cover` */
+/* This just stretches the width of an embed which reduces black bars a tad */
+iframe {
+  width: 100%;
 }
 
 .circle {
