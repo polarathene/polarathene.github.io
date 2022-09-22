@@ -56,7 +56,7 @@
               <li>A <code>for</code> loop that decrements a countdown to iterate through an array backwards, without using alternative functional methods to do the iteration.</li>
               <li>The browser console was not outputting any <code>console.log()</code> within the loop.</li>
             </ul>
-            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="1,5"></pre>
+            <pre data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="1,5"></pre>
             <video autoplay muted loop>
               <source src="/assets/page/problem-solving/strange-endlessly.webm" type="video/webm">
               <source src="/assets/page/problem-solving/strange-endlessly.mp4" type="video/mp4">
@@ -67,14 +67,14 @@
             <p>Reproducing locally by trying it with <code>console.log()</code>, but checking for <code>i !== 0</code>, not <code>i &lt; array.length</code>.</p>
             <p>Also MDN docs on the <code>for</code> loop syntax to verify how the condition toggles loop iteration, as I had confused myself when originally trying to help advise with a rubber ducky-like approach :grimacing:</p>
             <p>First simplify the problem with rubber ducky, we can take away the variables and just focus on the values we're starting the loop with:</p>
-            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="13,23"></pre>
+            <pre data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="13,23"></pre>
             <p>As <code>3</code> is decrementing each loop, the condition will always be <code>&lt; 4</code>, never changing to stop the loop.</p>
             <video autoplay muted loop>
               <source src="/assets/page/problem-solving/strange-bargain.webm" type="video/webm">
               <source src="/assets/page/problem-solving/strange-bargain.mp4" type="video/mp4">
             </video>
             <p>For a sanity check on how the loop condition worked, I wrote a little code to try that wouldn't result in an infinite loop:</p>
-            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="27,39"></pre>
+            <pre data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="27,39"></pre>
             <p>Success! :partying_face:</p>
           </section>
           <section>
@@ -89,7 +89,7 @@
             <h3>What did you learn?</h3>
             <p>The <code>for</code> loop iteration condition will exit the loop when it is no longer <code>true</code>.</p>
             <p>Breaking down the <code>for</code> loop syntax into each iteration as code instead, helped think about what was going on and explain the infinite loop bug better:</p>
-            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="47,62"></pre>
+            <pre data-src="/assets/page/problem-solving/snippets/infinite-loop.js" data-range="47,62"></pre>
           </section>
         </section>
         <section>
@@ -98,7 +98,7 @@
             <h3>What was the problem?</h3>
             <p>A game where you change the colours of circles, where each colour was tallied, but was not providing an accurate tally of what the user saw.</p>
             <p>Here was the original code related to the bug:</p>
-            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="5,22"></pre>
+            <pre data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="5,22"></pre>
           </section>
           <section>
             <h3>What problem-solving techniques did you use?</h3>
@@ -111,7 +111,7 @@
               <li>Would not require to copy/paste code across effectively the same function when making updates, or adding support for new colours.</li>
             </ol>
             <p>This was my final solution that I was happy with:</p>
-            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="30,52"></pre>
+            <pre data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="30,52"></pre>
             <ul>
               <li>This function takes a CSS class name and generates a new function variant (as a closure) to return, simplifying function definitions/updates for this feature.</li>
               <li>The array used to create <code>filtered</code> could instead be defined external of the function, or just updated in-place in it's current form when supporting new colour classes. <code>filtered</code> contains all the supported classes, except the one the generated function will handle (<code>classToToggle</code>).</li>
@@ -122,7 +122,7 @@
             <h3>How did you feel throughout the process?</h3>
             <p>Confident.</p>
             <p>Although it took me a while to figure out how to approach the removal nicely. Originally I tried a <code>switch () { ... }</code> statement, but it didn't seem very DRY? <em>(Plus the loop had no context of what not to remove)</em>:</p>
-            <pre class="language-js" data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="59,85"></pre>
+            <pre data-src="/assets/page/problem-solving/snippets/class-juggling.js" data-range="59,85"></pre>
           </section>
           <section>
             <h3>What did you learn?</h3>
